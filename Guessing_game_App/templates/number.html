@@ -1,0 +1,26 @@
+{% extends "master.html" %}
+{% block style %}     
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+{% endblock style %}  
+
+{% block body %}
+<div class="container">
+  <div class="mt-5">
+  <form action="validate" method="POST"> 
+    {% csrf_token %}
+    <div class="mb-3">
+     <p> Your Name is : <strong> {{username}} </strong><p>
+     <br>
+     <p> Your number is : <strong>  {{number}} </strong><p>
+      
+    </div>
+    <button type="submit" class="btn btn-success">Validate</button>
+
+  </form>
+  <br>
+  <button type="submit" class="btn btn-dark" onclick="document.location='guess'"> Back   </button>
+</div>
+</div>
+
+{% endblock body %}
