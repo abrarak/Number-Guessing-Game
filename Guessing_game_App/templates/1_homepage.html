@@ -1,17 +1,8 @@
-{% extends "master.html" %}
+{% extends "0_master.html" %}
 {% block style %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 {% endblock style %}
-
-
 {% block body %}
-    <div class="container">
-        <div class="mt-5">
-      
-              <button type="submit" class="btn btn-primary" onclick="document.location='guess'">Make an entry</button>
-          
-
-        </div>
-      </div>
+    <div class="container"><div class="mt-5"><button type="submit" class="btn btn-primary" onclick="document.location='usernameentry'">Make an entry</button> </div></div>
 {% endblock body %}
