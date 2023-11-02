@@ -1,112 +1,61 @@
-{% extends "master.html" %}
+{% extends "0_master.html" %}
 {% block style %}     
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<Style>
-    p{
-        text-align:center;  
-        margin:10px
-    }
-    
-</style>
+<Style>p{text-align:center;margin:10px}</style>
 {% endblock style %}  
-
 {% block body %}
 <div class="container">
     <div class="mt-5">
-    <form>
-        <p>Hi <strong> {{username}} </strong> !! Welcome to Our Website</p>
-        <br>
-        <p> Guessed Number : <strong>{{usernumber}}</strong></p>
-        <br>
-        {% if chance > 0 %}
+        <p>Hi  {{username}}  !! Welcome to Our Website</p><br>
+        <p> Guessed Number : {{usernumber}}</p>
+{% if chance > 0 %}
         {% if systemnumber > usernumber %}
         
-            <div class="alert alert-warning" role="alert" style="margin-left:325px;margin-right:325px">
-               You guessed too  <strong> low !</strong>
-                
-            </div>
-            <div class="alert alert-primary" role="alert" style="margin-left:325px;margin-right:325px">
-                You have <strong>{{chance}} </strong>chance left 
-                 
-             </div>
-           
-        <div class="d-grid gap-2 col-5 mx-auto">
-            <button type="button" onclick="document.location='retry'" class="btn btn-primary"><strong>Retry</strong></button>
-            </div>
+        <div class="alert alert-warning" role="alert" style="margin-left:325px;margin-right:325px;text-align:center">Guessed too   low ! You have {{chance}} chance left</div>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.back()" class="btn btn-danger">Retry</button></div><br>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-3)" class="btn btn-primary">Exit</button></div><br>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-5)" class="btn btn-primary">Log Out</button></div><br>
 
-        {% elif systemnumber < usernumber %}
+       {% elif systemnumber < usernumber %}
 
-        <div class="alert alert-warning" role="alert" style="margin-left:325px;margin-right:325px">
-            You guessed too  <strong> High !</strong>
-            
-        </div>
-        <div class="alert alert-primary" role="alert" style="margin-left:325px;margin-right:325px">
-            You have <strong>{{chance}} </strong>chance left 
-             
-         </div>
-    <div class="d-grid gap-2 col-5 mx-auto">
-        <button type="button" onclick="document.location='retry'" class="btn btn-primary"><strong>Retry</strong></button>
-        </div>
+       <div class="alert alert-warning" role="alert" style="margin-left:325px;margin-right:325px;text-align:center"> You guessed too   High ! You have {{chance}} chance left</div><br>
+       <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-1)" class="btn btn-danger">Retry</button></div><br>
+       <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-3)" class="btn btn-primary">Exit</button></div><br>
+       <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-6)" class="btn btn-primary">Log Out</button></div><br>
+       {% else %}
 
+       <div class="alert alert-success" role="alert" style="margin-left:325px;margin-right:325px;text-align:center">Congrats , You Won !! </div>
+       <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-2)" class="btn btn-success">Play Again</button></div><br>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="myFunction()" class="btn btn-dark" id="Check" value={{systemnumber}}>Verify</button></div>
+       <p id="demo" style="margin-left:325px;margin-right:325px;background-color:lightgrey;border-radius:15px;font-size:20px"></p>
+       <script>
+           function myFunction() {
+             var x = document.getElementById("Check").value;
+             document.getElementById("demo").innerHTML ="Correct Answer is : " + x;
+           }
+       </script>
+       <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-3)" class="btn btn-primary">Exit</button></div><br>
+       <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-6)" class="btn btn-primary">Log Out</button></div><br>
+      
+       {% endif %}
+       {% else %}
+       
+       {% if  systemnumber == usernumber %}
+        <div class="alert alert-success" role="alert" style="margin-left:325px;margin-right:325px;text-align:center">Congrats , You Won !! <br> Gueesed In last Attempt </div>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-2)" class="btn btn-success">Play Again</button></div><br>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-2)" class="btn btn-primary">Exit</button></div><br>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-6)" class="btn btn-primary">Log Out</button></div><br>
         {% else %}
-
-        <div class="alert alert-success" role="alert" style="margin-left:325px;margin-right:325px">
-    
-            <strong>Congrats , You Won !! </strong>
-        </div>
-        <div class="d-grid gap-2 col-5 mx-auto">
-            <button type="button" onclick="document.location='guess'" class="btn btn-success"><strong>Play Again</strong></button>
-            </div>
-            <br>
-    
-          
+        <div class="alert alert-info" role="alert" style="margin-left:325px;margin-right:325px;text-align:center">You Lost !! Sorry you have no more Chance !!</div>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="myFunction()" class="btn btn-success" id="Check" value={{systemnumber}}>Check the Answer</button></div>
+        <p id="demo" style="margin-left:325px;margin-right:325px;background-color:lightgrey;border-radius:15px;font-size:20px"></p>
+        <script>
+            function myFunction() {
+              var x = document.getElementById("Check").value;
+              document.getElementById("demo").innerHTML ="Correct Answer is : " + x;
+            }
+        </script>
+        <div class="d-grid gap-2 col-5 mx-auto"><button type="button" onclick="history.go(-2)" class="btn btn-primary">Play Again</button></div>
         {% endif %}
-      </form>
-      <hr>
-      <div class="d-grid gap-2 col-5 mx-auto">
-        <button type="button" onclick="document.location='/'" class="btn btn-dark"><strong>Exit</strong></button>
-        </div>
-        {% else %}
-
-        {% if   systemnumber == usernumber %}
-         <div class="alert alert-success" role="alert" style="margin-left:325px;margin-right:325px">
-            <strong>Congrats , You Won !!Gueesed In last Attempt </strong>
-        </div>
-        <div class="d-grid gap-2 col-5 mx-auto">
-            <button type="button" onclick="document.location='guess'" class="btn btn-success"><strong>Play Again</strong></button>
-            </div>
-            <br>
-        {% else %}
-        <div class="alert alert-info" role="alert" style="margin-left:325px;margin-right:325px;text-align:center">
-            <strong>You Lost !!</strong>
-          </div>
-        <div class="alert alert-danger" role="alert" style="margin-left:325px;margin-right:325px;text-align:center">
-    
-            <strong>Sorry you have no more Chance !!</strong>
-        </div>
-
-        <div class="d-grid gap-2 col-5 mx-auto">
-            <button type="button" onclick="myFunction()" class="btn btn-success" id="Check" value={{systemnumber}}><strong>Check the Answer </strong></button>
-            </div>
-         
-            
-                
-          
-              <p id="demo"></p>
-        
-            <script>
-                function myFunction() {
-                  var x = document.getElementById("Check").value;
-                  document.getElementById("demo").innerHTML = x;
-                }
-                </script>
-
-
-        <div class="d-grid gap-2 col-5 mx-auto">
-            <button type="button" onclick="document.location='guess'" class="btn btn-success"><strong>Play Again</strong></button>
-            </div>
-            {% endif %}
-
         {% endif %}
 {% endblock body %}
